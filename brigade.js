@@ -3,21 +3,31 @@ const { events, Job } = require("brigadier");
 events.on("push", function(e, project) {
   console.log("received push for commit " + e.commit)
 
-  // Create a new job
-  var node = new Job("test-runner")
 
-  // We want our job to run the stock Docker Python 3 image
-  node.image = "nginx"
-
-  // Now we want it to run these commands in order:
-  node.tasks = [
-    "cp -r src/* /usr/share/nginx/html",
-    "docker build . -t html:v4",
-    "docker tag html:v4 nimbus2005/html:v4",
-    "docker push nimbus2005/html:v4",
- ]
-
-  // We're done configuring, so we run the job
-  node.run()
+var dockerBuild = new Job("docker-build")
+ 
+  dockerBuild.image = "docker:dind"
+  dockerBuild.privileged = true; // dind needs to run in privileged mode
+ 
+  dockerBuild.env = {
+    DOCKER_DRIVER: "overlay"
+  }
+ 
+  // Place these credentials in your project YAML and update it using helm 
+  dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin 
+  dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
+ 
+  dockerBuild.tasks = [
+    "dockerd-entrypoint.sh &amp;", // Start the docker daemon
+    "sleep 20", // Grant it enough time to be up and running
+    "cd /src/", // Go to the project checkout dir
+    "docker build -t nimbus2005/html:v4 .", // Replace with your own image tag
+    "docker login -u $DOCKER_USER -p $DOCKER_PASS",
+    "docker push nimbus2005/html:v4" // Replace with your own image tag
+  ]
+ 
+  dockerBuild.run().then( () =&gt; {
+    events.emit("build-done", e, project) // Fire the next event
+  })
 })
 
