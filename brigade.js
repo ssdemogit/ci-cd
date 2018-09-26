@@ -15,8 +15,9 @@ events.on("push", function(e, project) {
     "docker build . -t html:v4",
     "docker tag html:v4 nimbus2005/html:v4",
     "docker push nimbus2005/html:v4",
-[
+ ]
 
- node.run()
+  // We're done configuring, so we run the job
+  node.run()
 })
 
