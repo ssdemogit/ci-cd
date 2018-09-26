@@ -11,7 +11,7 @@ events.on("push", function(e, project) {
 
   // Now we want it to run these commands in order:
   node.tasks = [
-    "cp -r * /usr/share/ngin/html",
+    "cp -r * /usr/share/nginx/html",
     "docker build . -t html:v4",
     "docker tag html:v4 nimbus2005/html:v4",
     "docker push nimbus2005/html:v4",
