@@ -17,7 +17,7 @@ events.on("push", function(e, project) {
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
 
   dockerBuild.tasks = [
-    "dockerd-entrypoint.sh &amp;", // Start the docker daemon
+    "dockerd-entrypoint.sh &", // Start the docker daemon
     "sleep 20", // Grant it enough time to be up and running
     "cd /src/", // Go to the project checkout dir
     "docker build . -t html:v4", // Replace with your own image tag
