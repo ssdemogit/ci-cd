@@ -18,7 +18,7 @@ events.on("push", (e, project) => {
   dockerBuild.tasks = [
     "docker --version",
     "dockerd-entrypoint.sh &",
-    "sleep 30",
+    "sleep 60",
     "docker images",
     //"cd /src/",
     //"docker build -t nimbus2005/html:v4 .",
