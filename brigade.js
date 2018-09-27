@@ -10,13 +10,13 @@ events.on("push", (e, project) => {
     DOCKER_DRIVER: "overlay"
   }
 
-  dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
-  dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
+  //dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
+  //dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
 
   dockerBuild.tasks = [
     "dockerd-entrypoint.sh &",
-    "echo 'hello'",
-    "docker images"
+    "sleep 30",
+    "docker images",
     //"cd /src/",
     //"docker build -t nimbus2005/html:v4 .",
     //"docker login -u $DOCKER_USER -p $DOCKER_PASS",
