@@ -21,9 +21,9 @@ var dockerBuild = new Job("docker-build")
     "dockerd-entrypoint.sh &amp;", // Start the docker daemon
     "sleep 20", // Grant it enough time to be up and running
     "cd /src/", // Go to the project checkout dir
-    "docker build -t nimbus2005/html:v4 .", // Replace with your own image tag
+    "docker build -t nimbus2005/html:v4", // Replace with your own image tag
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:v4" // Replace with your own image tag
+    "docker push nimbus2005/html:v4", // Replace with your own image tag
   ]
  
   dockerBuild.run().then( () =&gt; {
