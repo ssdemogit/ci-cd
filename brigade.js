@@ -3,8 +3,7 @@ const { events, Job } = require("brigadier");
 events.on("push", (e, project) => {
   console.log("received push for commit " + e.commit)
 
-  var dockerBuild = new Job("docker-build")
-  dockerBuild.image = "docker:dind"
+  var dockerBuild = new Job("docker-build", "docker:dind")
   dockerBuild.privileged = true;
 
   dockerBuild.env = {
