@@ -6,7 +6,7 @@ events.on("push", (e, project) => {
   var dockerBuild = new Job("docker-build")
   
   dockerBuild.image = "docker:dind"
-  dockerBuild.privileged = "true"
+  dockerBuild.privileged = true
 
   dockerBuild.env = {
      DOCKER_DRIVER: "overlay"
