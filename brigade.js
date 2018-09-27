@@ -7,13 +7,13 @@ events.on("push", function(e, project) {
 
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true; // dind needs to run in privileged mode
-
+  dockerBuild.storage.enabled = true;
   dockerBuild.env = {
    //DOCKER_DRIVER: "overlay"
     "DOCKER_DRIVER": "overlay",
     "dockerBuild.env.DOCKER_USER": "project.secrets.dockerLogin",
     "dockerBuild.env.DOCKER_PASS": "project.secrets.dockerPass",
-    "Storage Driver": "overlay"
+    //"Storage Driver": "overlay"
  }
 
     dockerBuild.tasks = [
