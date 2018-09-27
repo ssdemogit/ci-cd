@@ -10,10 +10,10 @@ var dockerBuild = new Job("docker-build")
   package.storage.enabled = false; 
   
   dockerBuild.env = {
-    DOCKER_DRIVER: "overlay"
+    DOCKER_DRIVER: "overlay",
   // Place these credentials in your project YAML and update it using helm 
-  "DOCKER_USER": project.secrets.dockerLogin, 
-  "DOCKER_PASS": project.secrets.dockerPass,
+  "DOCKER_USER": "project.secrets.dockerLogin", 
+  "DOCKER_PASS": "project.secrets.dockerPass",
  }
   dockerBuild.tasks = [
     "dockerd-entrypoint.sh &", // Start the docker daemon
