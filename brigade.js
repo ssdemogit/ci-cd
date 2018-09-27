@@ -26,6 +26,7 @@ var dockerBuild = new Job("docker-build")
     "docker push nimbus2005/html:v4", // Replace with your own image tag
   ]
 
-  dockerBuild.run()
+ dockerBuild.run().then( () =&gt; {
+    events.emit("build-done", e, project) // Fire the next event
+  })
 })
-
