@@ -7,7 +7,7 @@ events.on("push", (e, project) => {
   dockerBuild.privileged = true;
 
   dockerBuild.env = {
-     dockerBuild.env.DOCKER_DRIVER: "overlay"
+     DOCKER_DRIVER: "overlay"
   }
 
   //dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
