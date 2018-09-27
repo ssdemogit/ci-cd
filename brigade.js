@@ -9,7 +9,7 @@ events.on("push", function(e, project) {
   dockerBuild.privileged = true; // dind needs to run in privileged mode
 
   dockerBuild.env = {
-    DOCKER_DRIVER: "overlay"
+    DOCKER_DRIVER: "overlay",
   }
 
   // Place these credentials in your project YAML and update it using helm 
