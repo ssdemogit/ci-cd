@@ -9,14 +9,12 @@ events.on("push", function(e, project) {
   dockerBuild.privileged = true; // dind needs to run in privileged mode
 
   dockerBuild.env = {
-    DOCKER_DRIVER: "overlay",
+    "DOCKER_DRIVER": "overlay",
+    "dockerBuild.env.DOCKER_USER": "project.secrets.dockerLogin",
+    "dockerBuild.env.DOCKER_PASS": "project.secrets.dockerPass",
   }
 
-  // Place these credentials in your project YAML and update it using helm 
-  dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin 
-  dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
-
-  dockerBuild.tasks = [
+    dockerBuild.tasks = [
     "dockerd-entrypoint.sh &", // Start the docker daemon
     "sleep 30", // Grant it enough time to be up and running
     "cd /src/", // Go to the project checkout dir
