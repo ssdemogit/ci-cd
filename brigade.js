@@ -19,7 +19,7 @@ events.on("push", function(e, project) {
     "dockerd-entrypoint.sh &", // Start the docker daemon
     "sleep 30", // Grant it enough time to be up and running
     "cd /src/", // Go to the project checkout dir
-    "docker build . -t html:v4", // Replace with your own image tag
+    "docker build -t html:v4 .", // Replace with your own image tag
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:v4", // Replace with your own image tag
   ]
