@@ -16,7 +16,8 @@ events.on("push", (e, project) => {
 
   dockerBuild.tasks = [
     "dockerd-entrypoint.sh &",
-    "echo 'hello'"
+    "echo 'hello'",
+    "docker images"
     //"cd /src/",
     //"docker build -t nimbus2005/html:v4 .",
     //"docker login -u $DOCKER_USER -p $DOCKER_PASS",
