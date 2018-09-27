@@ -7,7 +7,7 @@ var dockerBuild = new Job("docker-build")
  
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true; // dind needs to run in privileged mode
- 
+  package.storage.enabled = true 
   dockerBuild.env = {
     DOCKER_DRIVER: "overlay"
   }
