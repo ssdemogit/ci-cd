@@ -16,6 +16,7 @@ events.on("push", (e, project) => {
   //dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
 
   dockerBuild.tasks = [
+    "mkfs -t xfs -n ftype=1 /dev/rhel/docker-pool",
     "dockerd-entrypoint.sh &",
     "sleep 30",
     "docker images",
