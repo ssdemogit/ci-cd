@@ -1,9 +1,9 @@
 const { events, Job } = require("brigadier");
 
-//events.on("push", function(e, project) {
+events.on("push", function(e, project) {
   console.log("received push for commit " + e.commit)
 
-events.on("push", (e, project) =&gt; {
+events.on("task-done", (e, project) {
 var dockerBuild = new Job("docker-build")
 
   dockerBuild.image = "docker:dind"
