@@ -5,12 +5,12 @@ events.on("push", (e, project) => {
 
   var dockerBuild = new Job("docker-build")
   
-  dockerBuild.image = "docker:edge"
-  dockerBuild.privileged = true
-  
+  dockerBuild.image = "docker:dind"
+  dockerBuild.privileged = true;
+  dockerBuild.storage-driver = overlay
   dockerBuild.env = {
      DOCKER_DRIVER: "overlay"
-  }
+     }
 
   //dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   //dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
