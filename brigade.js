@@ -3,8 +3,7 @@ const { events, Job } = require("brigadier");
 events.on("push", function(e, project) {
   console.log("received push for commit " + e.commit)
 
-events.on("task-done", (e, project) {
-var dockerBuild = new Job("docker-build")
+  var dockerBuild = new Job("docker-build")
 
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true; // dind needs to run in privileged mode
@@ -26,7 +25,5 @@ var dockerBuild = new Job("docker-build")
     "docker push nimbus2005/html:v4", // Replace with your own image tag
   ]
 
- dockerBuild.run().then( () =&gt; {
-    events.emit("build-done", e, project) // Fire the next event
-  })
+ dockerBuild.run()
 })
