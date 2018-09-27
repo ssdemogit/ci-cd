@@ -11,12 +11,10 @@ var dockerBuild = new Job("docker-build")
   
   dockerBuild.env = {
     DOCKER_DRIVER: "overlay"
-  }
- 
   // Place these credentials in your project YAML and update it using helm 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin 
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
- 
+ }
   dockerBuild.tasks = [
     "dockerd-entrypoint.sh &", // Start the docker daemon
     "sleep 20", // Grant it enough time to be up and running
