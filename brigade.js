@@ -13,8 +13,8 @@ events.on("push", function(e, project) {
    //"DOCKER_DRIVER": "overlay",
    // "dockerBuild.env.DOCKER_USER": "project.secrets.dockerLogin",
    //"dockerBuild.env.DOCKER_PASS": "project.secrets.dockerPass",
-   DOCKER_USER: "project.secrets.dockerLogin"
-   DOCKER_PASS: "project.secrets.dockerPass"
+   DOCKER_USER: "dockerLogin"
+   DOCKER_PASS: "dockerPass"
  }
 
     dockerBuild.tasks = [
