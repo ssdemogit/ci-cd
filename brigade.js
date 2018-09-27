@@ -9,12 +9,12 @@ events.on("push", function(e, project) {
   dockerBuild.privileged = true; // dind needs to run in privileged mode
 
   dockerBuild.env = {
-   DOCKER_DRIVER: "overlay" 
+   DOCKER_DRIVER: "overlay"
    //"DOCKER_DRIVER": "overlay",
    // "dockerBuild.env.DOCKER_USER": "project.secrets.dockerLogin",
    //"dockerBuild.env.DOCKER_PASS": "project.secrets.dockerPass",
-  dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin 
-  dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass 
+  dockerBuild.env.DOCKER_USER = "project.secrets.dockerLogin"
+  dockerBuild.env.DOCKER_PASS = "project.secrets.dockerPass"
  }
 
     dockerBuild.tasks = [
