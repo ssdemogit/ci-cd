@@ -20,10 +20,10 @@ events.on("push", (e, project) => {
     "dockerd-entrypoint.sh &",
     "sleep 60",
     "docker images",
-    //"cd /src/",
-    //"docker build -t nimbus2005/html:v4 .",
-    //"docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    //"docker push nimbus2005/html:v4"
+    "cd /src/",
+    "docker build -t nimbus2005/html:v4 .",
+    "docker login -u $DOCKER_USER -p $DOCKER_PASS",
+    "docker push nimbus2005/html:v4"
   ]
 
   dockerBuild.run()
