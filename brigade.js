@@ -5,7 +5,7 @@ events.on("push", (e, project) => {
 
   var dockerBuild = new Job("docker-build")
   
-  dockerBuild.image = "docker:stable-dind"
+  dockerBuild.image = "docker:edge"
   dockerBuild.privileged = true
   
   dockerBuild.env = {
