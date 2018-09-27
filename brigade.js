@@ -14,7 +14,6 @@ events.on("push", function(e, project) {
     "dockerBuild.env.DOCKER_USER": "project.secrets.dockerLogin",
     "dockerBuild.env.DOCKER_PASS": "project.secrets.dockerPass",
     "Storage Driver": "overlay"
-    "Supports d_type": "false"
  }
 
     dockerBuild.tasks = [
