@@ -4,7 +4,6 @@ events.on("push", (e, project) => {
   console.log("received push for commit " + e.commit)
 
   var dockerBuild = new Job("docker-build")
-
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true;
 
@@ -17,11 +16,11 @@ events.on("push", (e, project) => {
 
   dockerBuild.tasks = [
     "dockerd-entrypoint.sh &",
-    "sleep 40",
-    "cd /src/",
-    "docker build -t nimbus2005/html:v4 .",
-    "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:v4"
+    "echo 'hello'"
+    //"cd /src/",
+    //"docker build -t nimbus2005/html:v4 .",
+    //"docker login -u $DOCKER_USER -p $DOCKER_PASS",
+    //"docker push nimbus2005/html:v4"
   ]
 
   dockerBuild.run()
