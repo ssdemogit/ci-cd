@@ -4,7 +4,7 @@ events.on("push", function(e, project) {
   console.log("received push for commit " + e.commit)
 
 var dockerBuild = new Job("docker-build")
- 
+
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true; // dind needs to run in privileged mode
   package.storage.enabled = true 
