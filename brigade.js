@@ -2,7 +2,9 @@ const { events, Job } = require("brigadier");
 
 events.on("push", (e, project) => {
   console.log("received push for commit " + e.commit)
-
+  var azClientSecret = project.secrets.appId
+ var azTenant = project.secrets.tenant
+ var azPass =   project.secrets.pass
   var dockerBuild = new Job("docker-build")
   
   dockerBuild.image = "docker:dind"
@@ -14,7 +16,7 @@ events.on("push", (e, project) => {
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
-
+  
   dockerBuild.tasks = [
     "docker --version",
     "dockerd-entrypoint.sh &",
@@ -26,6 +28,19 @@ events.on("push", (e, project) => {
     "docker push nimbus2005/html:v4"
   ]
 
-  dockerBuild.run()
+  dockerBuild.run().then( () =&gt; {
+    events.emit("build-done", e, project) // Fire the next event
   })
+})
 
+var deploy = new Job("deploy-runner", "microsoft/azure-cli:2.0.43")
+} 
+deploy.env
+  deploy.tasks = [
+   'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
+    'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
+  deploy.run().then( () =&gt; {
+    // We'll probably want to do something with a successful deployment later
+    events.emit("success", e, project)
+  })
+})
