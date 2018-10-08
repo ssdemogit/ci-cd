@@ -30,7 +30,6 @@ events.on("push", (e, project) => {
 
 var deploy = new Job("deploy-runner", "microsoft/azure-cli:2.0.43")
 } 
-deploy.env
   deploy.tasks = [
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
     'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
