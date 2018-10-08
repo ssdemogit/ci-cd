@@ -35,5 +35,5 @@ deploy.env
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
     'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
   deploy.run()
-    
+})    
 })
