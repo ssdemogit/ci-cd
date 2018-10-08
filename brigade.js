@@ -29,8 +29,10 @@ events.on("push", (e, project) => {
   ]
 
 var deploy = new Job("deploy-runner", "microsoft/azure-cli:2.0.43")
-} 
-  deploy.tasks = [
+deploy.env = {
+    // DOCKER_DRIVER: "overlay"
+    }  
+deploy.tasks = [
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
     'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
   deploy.run()
