@@ -29,17 +29,6 @@ events.on("push", (e, project) => {
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:v4"
   ]
+dockerBuild.run()
 
-var deploy = new Job("deploy-runner", "microsoft/azure-cli:2.0.43")
-deploy.tasks = [
-   'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
-   'az aks get-credentials --resource-group ${azgroup} --name ${azk8s}' 
-]  
-   var helm = new Job("job-runner-helm")
-    helm.storage.enabled = false
-    helm.image = "dtzar/helm-kubectl"
-helm.tasks = [
-      'helm upgrade lumbering-molly /src/mychart/Chart.yaml --namespace default'
-  ]  
-helm.run()   
 })
