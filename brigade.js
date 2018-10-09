@@ -34,7 +34,12 @@ deploy.env = {
     }  
 deploy.tasks = [
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
-    'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
   ]  
-deploy.run()   
+   var helm = new Job("job-runner-helm")
+    helm.storage.enabled = false
+    helm.image = "lachlanevenson/k8s-helm:v2.9.1"
+helm.tasks = [
+  'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
+  ]  
+helm.run()   
 })
