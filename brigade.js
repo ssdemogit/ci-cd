@@ -5,6 +5,8 @@ events.on("push", (e, project) => {
   var azClientSecret = project.secrets.appId
  var azTenant = project.secrets.tenant
  var azPass =   project.secrets.pass
+ var azgroup = project.secrets.azgrp
+ var azk8s =  project.secrets.azcluster
   var dockerBuild = new Job("docker-build")
   
   dockerBuild.image = "docker:dind"
@@ -34,7 +36,8 @@ deploy.env = {
     }  
 deploy.tasks = [
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
-  ]  
+   'az aks get-credentials --resource-group ${azgroup} --name ${azk8s}' 
+]  
    var helm = new Job("job-runner-helm")
     helm.storage.enabled = false
     helm.image = "lachlanevenson/k8s-helm:v2.9.1"
