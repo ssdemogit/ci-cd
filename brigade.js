@@ -1,4 +1,4 @@
-const { events, Job } = require("brigadier");
+const { events, Job, Group } = require("brigadier");
 
 events.on("push", (e, project) => {
   console.log("received push for commit " + e.commit)
@@ -37,7 +37,7 @@ deploy.tasks = [
 ]  
    var helm = new Job("job-runner-helm")
     helm.storage.enabled = false
-    helm.image = "lachlanevenson/k8s-helm:v2.9.1"
+    helm.image = "dtzar/helm-kubectl"
 helm.tasks = [
       'helm upgrade lumbering-molly /src/mychart/Chart.yaml'
   ]  
