@@ -31,9 +31,6 @@ events.on("push", (e, project) => {
   ]
 
 var deploy = new Job("deploy-runner", "microsoft/azure-cli:2.0.43")
-deploy.env = {
-    // DOCKER_DRIVER: "overlay"
-    }  
 deploy.tasks = [
    'az login --service-principal -u ${appId} -p ${azPass} --tenant ${azTenant}',
    'az aks get-credentials --resource-group ${azgroup} --name ${azk8s}' 
