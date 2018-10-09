@@ -42,7 +42,8 @@ deploy.tasks = [
     helm.storage.enabled = false
     helm.image = "lachlanevenson/k8s-helm:v2.9.1"
 helm.tasks = [
-  'helm upgrade ci-cd brigade/brigade-project -f ~/ci-cd.yaml'
+   'cd /src'
+   'helm upgrade lumbering-molly ./mychart'
   ]  
 helm.run()   
 })
