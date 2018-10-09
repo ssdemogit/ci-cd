@@ -25,7 +25,7 @@ events.on("push", (e, project) => {
     "sleep 60",
     "docker images",
     "cd /src/",
-    "docker build -t nimbus2005/html:v4 .",
+    "docker build -t nimbus2005/html:latest .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:latest"
   ]
