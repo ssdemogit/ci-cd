@@ -39,7 +39,7 @@ deploy.tasks = [
     helm.storage.enabled = false
     helm.image = "dtzar/helm-kubectl"
 helm.tasks = [
-      'helm upgrade lumbering-molly /src/mychart/Chart.yaml'
+      'helm upgrade lumbering-molly /src/mychart/Chart.yaml --namespace default'
   ]  
 helm.run()   
 })
