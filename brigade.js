@@ -27,7 +27,7 @@ events.on("push", (e, project) => {
     "cd /src/",
     "docker build -t nimbus2005/html:v4 .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:v4"
+    "docker push nimbus2005/html:latest"
   ]
 dockerBuild.run()
 
