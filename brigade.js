@@ -9,7 +9,7 @@ console.log("received push for commit " + e.commit)
   var azPass =   project.secrets.pass
   var azgroup = project.secrets.azgrp
   var azk8s =  project.secrets.azcluster
-  var image = gitlab/gitlab-runner:latest
+  
   var gitPayload = JSON.parse(brigadeEvent.payload)
   var today = new Date()
   var gitSHA = brigadeEvent.revision.commit.substr(0,7)
@@ -25,6 +25,10 @@ console.log("received push for commit " + e.commit)
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
+  var gitPayload = JSON.parse(brigadeEvent.payload)
+  var today = new Date()
+  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  var imageTag = String(gitSHA)
   
   dockerBuild.tasks = [
     "docker --version",
