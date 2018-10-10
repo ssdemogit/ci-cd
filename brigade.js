@@ -9,6 +9,8 @@ const { events, Job, Group } = require('brigadier')
   var azPass =   project.secrets.pass
   var azgroup = project.secrets.azgrp
   var azk8s =  project.secrets.azcluster
+  var gitPayload = JSON.parse(brigadeEvent.payload)
+  var today = new Date()
   var gitSHA = brigadeEvent.revision.commit.substr(0,7)
   var imageTag = String(gitSHA)
   
