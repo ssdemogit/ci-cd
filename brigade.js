@@ -1,6 +1,6 @@
 const { events, Job, Group } = require('brigadier')
 
-events.on("push", function(e, project) {
+events.on("push", (brigadeEvent, project) => {
 console.log("received push for commit " + e.commit)
   //events.on("push", function(e, project) {
   //console.log("received push for commit " + e.commit)
