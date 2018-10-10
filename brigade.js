@@ -25,10 +25,7 @@ events.on("push", (brigadeEvent, project) => {
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
-  var gitPayload = JSON.parse(brigadeEvent.payload)
-  var today = new Date()
-  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  var imageTag = String(gitSHA)
+  
   
   dockerBuild.tasks = [
     "docker --version",
@@ -36,9 +33,9 @@ events.on("push", (brigadeEvent, project) => {
     "sleep 60",
     "docker images",
     "cd /src/html",
-    "docker build -t nimbus2005/html:${imageTag} .",
+    "docker build -t nimbus2005/html:$imageTag .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:${imageTag}"
+    "docker push nimbus2005/html:$imageTag"
   ]
 dockerBuild.run()
 
