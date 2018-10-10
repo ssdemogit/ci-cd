@@ -8,7 +8,8 @@ events.on("push", (e, project) => {
  var azgroup = project.secrets.azgrp
  var azk8s =  project.secrets.azcluster
   var dockerBuild = new Job("docker-build")
-  
+  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+var imageTag = String(gitSHA)
   dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true;
   DOCKER_DRIVER: "overlay"
@@ -25,9 +26,9 @@ events.on("push", (e, project) => {
     "sleep 60",
     "docker images",
     "cd /src/",
-    "docker build -t nimbus2005/html:latest .",
+    "docker build -t nimbus2005/html:imageTag .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:latest"
+    "docker push nimbus2005/html:imageTag"
   ]
 dockerBuild.run()
 
