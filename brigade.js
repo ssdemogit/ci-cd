@@ -30,7 +30,7 @@ console.log("received push for commit " + e.commit)
     "dockerd-entrypoint.sh &",
     "sleep 60",
     "docker images",
-    "cd /src/",
+    "cd /src/html",
     "docker build -t nimbus2005/html:v5 .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:v5"
