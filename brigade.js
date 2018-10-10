@@ -9,10 +9,11 @@ console.log("received push for commit " + e.commit)
   var azPass =   project.secrets.pass
   var azgroup = project.secrets.azgrp
   var azk8s =  project.secrets.azcluster
- // var gitPayload = JSON.parse(brigadeEvent.payload)
-  //var today = new Date()
-  //var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  //var imageTag = String(gitSHA)
+  var image = gitlab/gitlab-runner:latest
+  var gitPayload = JSON.parse(brigadeEvent.payload)
+  var today = new Date()
+  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  var imageTag = String(gitSHA)
   
   var dockerBuild = new Job("docker-build")
     dockerBuild.image = "docker:dind"
@@ -31,9 +32,9 @@ console.log("received push for commit " + e.commit)
     "sleep 60",
     "docker images",
     "cd /src/html",
-    "docker build -t nimbus2005/html:v5 .",
+    "docker build -t nimbus2005/html:${imageTag} .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:v5"
+    "docker push nimbus2005/html:${imageTag}"
   ]
 dockerBuild.run()
 
