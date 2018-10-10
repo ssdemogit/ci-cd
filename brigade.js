@@ -1,7 +1,7 @@
 const { events, Job, Group } = require('brigadier')
 
-  events.on("push", (brigadeEvent, project) => {
-
+events.on("push", function(e, project) {
+console.log("received push for commit " + e.commit)
   //events.on("push", function(e, project) {
   //console.log("received push for commit " + e.commit)
   var azClientSecret = project.secrets.appId
@@ -9,10 +9,10 @@ const { events, Job, Group } = require('brigadier')
   var azPass =   project.secrets.pass
   var azgroup = project.secrets.azgrp
   var azk8s =  project.secrets.azcluster
-  var gitPayload = JSON.parse(brigadeEvent.payload)
-  var today = new Date()
-  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  var imageTag = String(gitSHA)
+ // var gitPayload = JSON.parse(brigadeEvent.payload)
+  //var today = new Date()
+  //var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  //var imageTag = String(gitSHA)
   
   var dockerBuild = new Job("docker-build")
     dockerBuild.image = "docker:dind"
@@ -31,9 +31,9 @@ const { events, Job, Group } = require('brigadier')
     "sleep 60",
     "docker images",
     "cd /src/",
-    "docker build -t nimbus2005/html:${imageTag} .",
+    "docker build -t nimbus2005/html:v5 .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:${imageTag}"
+    "docker push nimbus2005/html:v5"
   ]
 dockerBuild.run()
 
