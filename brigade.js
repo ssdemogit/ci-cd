@@ -28,9 +28,9 @@ var imageTag = String(gitSHA)
     "sleep 60",
     "docker images",
     "cd /src/",
-    "docker build -t nimbus2005/html:imageTag .",
+    "docker build -t nimbus2005/html:${imageTag} .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push nimbus2005/html:imageTag"
+    "docker push nimbus2005/html:${imageTag}"
   ]
 dockerBuild.run()
 
