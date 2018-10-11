@@ -1,9 +1,9 @@
 const { events, Job, Group } = require('brigadier')
 
-//events.on("push", (brigadeEvent, project) => {
+events.on("push", (brigadeEvent, project) => {
 
-  events.on("push", function(e, project) {
-  console.log("received push for commit " + e.commit)
+  //events.on("push", function(e, project) {
+  //console.log("received push for commit " + e.commit)
   var azSecret = project.secrets.Appid
   var azTenant = project.secrets.Tenant
   var azPass =   project.secrets.Secret
