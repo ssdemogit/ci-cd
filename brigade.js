@@ -28,7 +28,7 @@ events.on("push", (brigadeEvent, project) => {
   
   
   dockerBuild.tasks = [
-    "echo $imageTag",
+    "echo imageTag",
     "docker --version",
     "dockerd-entrypoint.sh &",
     "sleep 60",
