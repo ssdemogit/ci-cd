@@ -26,8 +26,7 @@ events.on("push", (brigadeEvent, project) => {
   //DOCKER_DRIVER: "overlay"
   dockerBuild.env = {
     "DOCKER_DRIVER": "overlay"
-    "imageTag" : "String(gitSHA)"
-  }
+      }
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
@@ -39,7 +38,7 @@ events.on("push", (brigadeEvent, project) => {
     "sleep 60",
     "docker images",
     "cd /src/html",
-    "docker build -t nimbus2005/html:'+imageTag+' .",
+    "docker build -t nimbus2005/html:"+imageTag+" .",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:$imageTag"
   ]
