@@ -59,6 +59,7 @@ events.on("dockerBuild-done", (project) => {
   "azSecret" = project.secrets.Appid,
    "var azTenant" = project.secrets.Tenant,
   "azPass" =   project.secrets.Secret,
+  }
   
     deploy.tasks = [
  'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz',
