@@ -26,7 +26,8 @@ events.on("push", (brigadeEvent, project) => {
   //DOCKER_DRIVER: "overlay"
   dockerBuild.env = {
     "DOCKER_DRIVER": "overlay"
-    }
+    "imageTag" : "String(gitSHA)"
+  }
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
