@@ -46,7 +46,7 @@ events.on("push", (brigadeEvent, project) => {
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
     deploy.tasks = [
- 'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz.tasks',
+ 'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz',
  'tar xvzf helm-v2.11.0-linux-amd64.tar.gz',
   'mv linux-amd64/helm /usr/local/bin/helm' ,
  'az login --service-principal -u ${azSecret} -p ${azPass} --tenant ${azTenant}',
