@@ -45,10 +45,10 @@ events.on("push", (brigadeEvent, project) => {
   ]
     
    dockerBuild.run().then( () => {
-    events.emit("dockerBuild-done", project)
+    events.emit("dockerBuild-done", e, project)
   })
 })
-events.on("dockerBuild-done", ("project") => {
+events.on("dockerBuild-done", (e, project) => {
   console.log("deploying docker image")
     var gitPayload = JSON.parse(brigadeEvent.payload)
     var today = new Date()
