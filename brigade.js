@@ -69,7 +69,7 @@ var deploy = new Job("job-runner-acr-builder")
  'tar xvzf helm-v2.11.0-linux-amd64.tar.gz',
   'mv linux-amd64/helm /usr/local/bin/helm' ,
  'az login --service-principal -u '+azSecret+' -p '+azPass+' --tenant '+azTenant+'',
- 'az aks get-credentials --resource-group my-kubernetes --name myk8s'
+ 'az aks get-credentials --resource-group my-kubernetes --name myk8s',
   'helm ls'
     ]
   deploy.run()
