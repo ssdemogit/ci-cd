@@ -1,10 +1,11 @@
-const { events, Job, Group } = require('brigadier')
+const { events, Job} = require('brigadier')
 
-events.on("push", (brigadeEvent, project) => {
+//events.on("push", (brigadeEvent, project) => {
 
-  //events.on("push", function(e, project) {
-  //console.log("received push for commit " + e.commit)
-  var azSecret = project.secrets.Appid
+  events.on("push", (e, project) => {
+  console.log("received push for commit " + e.commit)
+  v
+  ar azSecret = project.secrets.Appid
   var azTenant = project.secrets.Tenant
   var azPass =   project.secrets.Secret
   //var azgroup = project.secrets.azgrp
@@ -44,7 +45,7 @@ events.on("push", (brigadeEvent, project) => {
   ]
     
    dockerBuild.run().then( () => {
-    events.emit("test-done", e, project)
+    events.emit("dockerBuild-done", e, project)
   })
 })
 events.on("dockerBuild-done", (e, project) => {
