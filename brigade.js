@@ -56,8 +56,8 @@ events.on("dockerBuild-done", (project) => {
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
   deploy.env = {
-  azSecret = project.secrets.Appid
-  azTenant = project.secrets.Tenant
+  azSecret = project.secrets.Appid,
+  azTenant = project.secrets.Tenant,
   azPass = project.secrets.Secret
   }
   
