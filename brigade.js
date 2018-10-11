@@ -17,6 +17,9 @@ events.on("push", (brigadeEvent, project) => {
    var gitPayload = JSON.parse(brigadeEvent.payload)
     var today = new Date()
     var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+    console.log('revision=>>', brigadeEvent.revision)
+    console.log('commit=>>', brigadeEvent.revision.commit)
+    console.log('gitsha=>>', gitSHA)
     var imageTag = "master-" + String(gitSHA)
     
   
