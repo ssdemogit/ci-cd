@@ -74,7 +74,7 @@ var deploy = new Job("job-runner-acr-builder")
  'az login --service-principal -u '+azSecret+' -p '+azPass+' --tenant '+azTenant+'',
  'az aks get-credentials --resource-group my-kubernetes --name myk8s',
   'helm ls',
-  'helm upgrade html --set image=nimbus2005/html:'+imageTag+' ./src/hello-world/ '
+  'helm upgrade html --set image=nimbus2005/html:'+imageTag+' ./src/hello-world/'
     ]
   deploy.run()
 })
