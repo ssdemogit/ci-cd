@@ -4,16 +4,16 @@ events.on("push", (brigadeEvent, project) => {
 
   //events.on("push", function(e, project) {
   //console.log("received push for commit " + e.commit)
-  var azClientSecret = project.secrets.appId
-  var azTenant = project.secrets.tenant
-  var azPass =   project.secrets.pass
-  var azgroup = project.secrets.azgrp
-  var azk8s =  project.secrets.azcluster
+  //var azClientSecret = project.secrets.appId
+  //var azTenant = project.secrets.tenant
+  //var azPass =   project.secrets.pass
+  //var azgroup = project.secrets.azgrp
+  //var azk8s =  project.secrets.azcluster
   
-  var gitPayload = JSON.parse(brigadeEvent.payload)
-  var today = new Date()
-  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  var imageTag = String(gitSHA)
+  const gitPayload = JSON.parse(brigadeEvent.payload)
+  const today = new Date()
+  const gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  const imageTag = String(gitSHA)
   
   var dockerBuild = new Job("docker-build")
     dockerBuild.image = "docker:dind"
@@ -28,7 +28,7 @@ events.on("push", (brigadeEvent, project) => {
   
   
   dockerBuild.tasks = [
-    "echo imageTag",
+    "echo $imageTag",
     "docker --version",
     "dockerd-entrypoint.sh &",
     "sleep 60",
