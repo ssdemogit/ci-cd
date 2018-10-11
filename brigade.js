@@ -51,8 +51,10 @@ events.on("push", (brigadeEvent, project) => {
 events.on("dockerBuild-done", (project) => {
   console.log("deploying docker image")
 
-
- var deploy = new Job("job-runner-acr-builder")
+var azSecret = project.secrets.Appid
+var azTenant = project.secrets.Tenant
+var azPass = project.secrets.Secret
+var deploy = new Job("job-runner-acr-builder")
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
   deploy.env = {
