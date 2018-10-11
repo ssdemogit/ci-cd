@@ -56,10 +56,11 @@ events.on("dockerBuild-done", (project) => {
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
   deploy.env = {
-  azSecret = project.secrets.Appid,
-  azTenant = project.secrets.Tenant,
-  azPass = project.secrets.Secret
   }
+  deploy.env.azSecret = project.secrets.Appid
+  deploy.env.azTenant = project.secrets.Tenant
+  deploy.env.azPass = project.secrets.Secret
+ 
   
     deploy.tasks = [
  'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz',
