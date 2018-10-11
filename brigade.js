@@ -38,7 +38,7 @@ events.on("push", (brigadeEvent, project) => {
     "sleep 60",
     "docker images",
     "cd /src/html",
-    "docker build -t nimbus2005/html:"+imageTag+".",
+    "docker build -t nimbus2005/html:"+imageTag+" -f /src/html/Dockerfile",
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:$imageTag"
   ]
