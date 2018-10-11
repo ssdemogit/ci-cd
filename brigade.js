@@ -45,7 +45,7 @@ events.on("push", (brigadeEvent, project) => {
   ]
     
    dockerBuild.run().then( () => {
-    events.emit("dockerBuild-done", (brigadeEvent, project)
+    events.emit("dockerBuild-done", brigadeEvent, project)
   })
 })
 events.on("dockerBuild-done", (brigadeEvent, project) => {
