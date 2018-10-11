@@ -48,34 +48,37 @@ events.on("push", (brigadeEvent, project) => {
     events.emit("dockerBuild-done", project)
   })
 })
-events.on("dockerBuild-done", (e, project) => {
+events.on("dockerBuild-done", (brigadeEvent, project) => {
   console.log("deploying docker image")
+
     var gitPayload = JSON.parse(brigadeEvent.payload)
     var today = new Date()
     var gitSHA = brigadeEvent.revision.commit.substr(0,7)
     var imageTag = String(gitSHA)
+    
     var azSecret = project.secrets.Appid
     var azTenant = project.secrets.Tenant
     var azPass = project.secrets.Secret
-
+    
 var deploy = new Job("job-runner-acr-builder")
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
   deploy.env = {
   }
-  //deploy.env.azSecret = project.secrets.Appid
-  //deploy.env.azTenant = project.secrets.Tenant
-  //deploy.env.azPass = project.secrets.Secret
+  
+  deploy.env.azSecret = project.secrets.Appid
+  deploy.env.azTenant = project.secrets.Tenant
+  deploy.env.azPass = project.secrets.Secret
  
   
     deploy.tasks = [
- 'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz',
- 'tar xvzf helm-v2.11.0-linux-amd64.tar.gz',
-  'mv linux-amd64/helm /usr/local/bin/helm' ,
- 'az login --service-principal -u '+azSecret+' -p '+azPass+' --tenant '+azTenant+'',
- 'az aks get-credentials --resource-group my-kubernetes --name myk8s',
-  'helm ls',
-  'helm upgrade html --set image=nimbus2005/html:'+imageTag+' /src/hello-world/'
+ "wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz",
+ "tar xvzf helm-v2.11.0-linux-amd64.tar.gz",
+  "mv linux-amd64/helm /usr/local/bin/helm" ,
+ "az login --service-principal -u "+azSecret+" -p "+azPass+" --tenant "+azTenant+"",
+ "az aks get-credentials --resource-group my-kubernetes --name myk8s",
+  "helm ls",
+  "helm upgrade html --set image=nimbus2005/html:"+imageTag+" /src/hello-world/"
     ]
   deploy.run()
 })
