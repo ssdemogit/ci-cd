@@ -50,7 +50,7 @@ events.on("push", (brigadeEvent, project) => {
 })
 events.on("dockerBuild-done", (project) => {
   console.log("deploying docker image")
-var gitPayload = JSON.parse(brigadeEvent.payload)
+//var gitPayload = JSON.parse(brigadeEvent.payload)
     var today = new Date()
     var gitSHA = brigadeEvent.revision.commit.substr(0,7)
     var imageTag = String(gitSHA)
