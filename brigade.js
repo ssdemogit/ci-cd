@@ -10,10 +10,15 @@ events.on("push", (brigadeEvent, project) => {
   //var azgroup = project.secrets.azgrp
   //var azk8s =  project.secrets.azcluster
   
-  var gitPayload = JSON.parse(brigadeEvent.payload)
-  var today = new Date()
-  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  var imageTag = String(gitSHA)
+  //var gitPayload = JSON.parse(brigadeEvent.payload)
+  //var today = new Date()
+  //var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  //var imageTag = String(gitSHA)
+   var gitPayload = JSON.parse(brigadeEvent.payload)
+    var today = new Date()
+    var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+    var imageTag = "master-" + String(gitSHA)
+    
   
   var dockerBuild = new Job("docker-build")
     dockerBuild.image = "docker:dind"
