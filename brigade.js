@@ -55,6 +55,11 @@ events.on("dockerBuild-done", (project) => {
  var deploy = new Job("job-runner-acr-builder")
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
+  deploy.env = {
+  "azSecret" = project.secrets.Appid,
+   "var azTenant" = project.secrets.Tenant,
+  "azPass" =   project.secrets.Secret,
+  
     deploy.tasks = [
  'wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz',
  'tar xvzf helm-v2.11.0-linux-amd64.tar.gz',
