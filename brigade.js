@@ -17,9 +17,6 @@ events.on("push", (brigadeEvent, project) => {
    var gitPayload = JSON.parse(brigadeEvent.payload)
     var today = new Date()
     var gitSHA = brigadeEvent.revision.commit.substr(0,7)
-    console.log('revision=>>', brigadeEvent.revision)
-    console.log('commit=>>', brigadeEvent.revision.commit)
-    console.log('gitsha=>>', gitSHA)
     var imageTag = "master-" + String(gitSHA)
     
   
@@ -34,7 +31,8 @@ events.on("push", (brigadeEvent, project) => {
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
   dockerBuild.env.DOCKER_PASS = project.secrets.dockerPass
   
-  
+  console.log('=>>', gitSHA);
+  console.log('=>>', "nimbus2005/html"+imageTag);
   dockerBuild.tasks = [
     "echo $imageTag",
     "docker --version",
