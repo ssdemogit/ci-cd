@@ -10,17 +10,17 @@ events.on("push", (brigadeEvent, project) => {
   //var azgroup = project.secrets.azgrp
   //var azk8s =  project.secrets.azcluster
   
-  const gitPayload = JSON.parse(brigadeEvent.payload)
-  const today = new Date()
-  const gitSHA = brigadeEvent.revision.commit.substr(0,7)
-  const imageTag = String(gitSHA)
+  var gitPayload = JSON.parse(brigadeEvent.payload)
+  var today = new Date()
+  var gitSHA = brigadeEvent.revision.commit.substr(0,7)
+  var imageTag = String(gitSHA)
   
   var dockerBuild = new Job("docker-build")
     dockerBuild.image = "docker:dind"
   dockerBuild.privileged = true;
-  DOCKER_DRIVER: "overlay"
+  //DOCKER_DRIVER: "overlay"
   dockerBuild.env = {
-    // DOCKER_DRIVER: "overlay"
+    "DOCKER_DRIVER": "overlay"
     }
 
   dockerBuild.env.DOCKER_USER = project.secrets.dockerLogin
