@@ -50,7 +50,7 @@ events.on("push", (brigadeEvent, project) => {
  'tar xvzf helm-v2.11.0-linux-amd64.tar.gz',
   'mv linux-amd64/helm /usr/local/bin/helm' ,
  'az login --service-principal -u '+azSecret+' -p '+azPass+' --tenant '+azTenant+'',
- 'az aks get-credentials --resource-group kubernetes --name k8s-cluster'
+ 'az aks get-credentials --resource-group my-kubernetes --name myk8s'
   ]
   deploy.run()
 })
