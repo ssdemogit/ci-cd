@@ -1,9 +1,9 @@
 const { events, Job, Group } = require('brigadier')
 
-events.on("push", (brigadeEvent, project) => {
+//events.on("push", (brigadeEvent, project) => {
 
-  //events.on("push", function(e, project) {
-  //console.log("received push for commit " + e.commit)
+  events.on("push", function(e, project) {
+  console.log("received push for commit " + e.commit)
   var azSecret = project.secrets.Appid
   var azTenant = project.secrets.Tenant
   var azPass =   project.secrets.Secret
@@ -42,6 +42,15 @@ events.on("push", (brigadeEvent, project) => {
     "docker login -u $DOCKER_USER -p $DOCKER_PASS",
     "docker push nimbus2005/html:"+imageTag+""
   ]
+    
+   dockerBuild.run().then( () => {
+    events.emit("test-done", e, project)
+  })
+})
+events.on("dockerBuild-done", (e, project) => {
+  console.log("deploying docker image")
+
+
  var deploy = new Job("job-runner-acr-builder")
     deploy.storage.enabled = false
     deploy.image = "microsoft/azure-cli:2.0.43"
