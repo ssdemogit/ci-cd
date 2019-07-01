@@ -1,4 +1,4 @@
-# docker build . -t my-php-app:1.0.0
+# docker build
 
 FROM nginx
 COPY . /usr/share/nginx/html
